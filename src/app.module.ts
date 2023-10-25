@@ -1,6 +1,9 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
+import { CategoryModule } from './modules/category/category.module';
+import { TransactionModule } from './modules/transaction/transaction.module';
+import { AccountModule } from './modules/account/account.module';
 import * as _entities from './domain/entities';
 
 @Module({
@@ -22,6 +25,9 @@ import * as _entities from './domain/entities';
         };
       },
     }),
+    CategoryModule,
+    TransactionModule,
+    AccountModule,
   ],
   controllers: [],
   providers: [],
