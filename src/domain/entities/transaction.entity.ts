@@ -8,7 +8,7 @@ import {
   ManyToOne,
 } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
-import { BankEntity } from './bank.entiti';
+import { AccountEntity } from './bank.entiti';
 import { CategoryEntity } from './category.entity';
 
 @Entity('transaction')
@@ -23,12 +23,14 @@ export class TransactionEntity extends AbstractEntity {
   })
   public type: TransactionType;
 
-  @ManyToOne(() => BankEntity, (bank) => bank.transactions, { cascade: true })
+  @ManyToOne(() => AccountEntity, (account) => account.transactions, {
+    cascade: true,
+  })
   @JoinColumn({ name: 'bankId' })
-  public bank: BankEntity;
+  public account: AccountEntity;
 
   @Column()
-  public bankId: string;
+  public accountId: string;
 
   @ManyToMany(() => CategoryEntity, (category) => category.transactions)
   @JoinTable({
