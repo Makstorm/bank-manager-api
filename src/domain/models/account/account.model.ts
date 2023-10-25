@@ -6,7 +6,7 @@ export class AccountModel {
   @ApiProperty({ type: String, example: randomUUID() })
   public id: string;
 
-  @ApiProperty({ type: String, example: 'Monobank' })
+  @ApiProperty({ type: String, example: 'Monobank-BlackCard' })
   public name: string;
 
   @ApiProperty({ type: Number, example: 1000 })
