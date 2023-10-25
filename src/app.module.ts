@@ -3,6 +3,7 @@ import { ConfigModule, ConfigService } from '@nestjs/config';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { CategoryModule, TransactionModule, AccountModule } from './modules';
 import * as _entities from './domain/entities';
+import { EventEmitterModule } from '@nestjs/event-emitter';
 
 @Module({
   imports: [
@@ -23,6 +24,17 @@ import * as _entities from './domain/entities';
         };
       },
     }),
+    EventEmitterModule.forRoot(),
+    // WinstonModule.forRoot({
+    //   format: winston.format.json(),
+    //   transports: [
+    //     new winston.transports.File({
+    //       dirname: path.join(__dirname, './../log/info/'),
+    //       filename: 'payments.log',
+    //       level: 'info',
+    //     }),
+    //   ],
+    // }),
     CategoryModule,
     TransactionModule,
     AccountModule,

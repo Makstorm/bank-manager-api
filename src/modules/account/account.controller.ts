@@ -16,8 +16,9 @@ import {
   Post,
   Put,
 } from '@nestjs/common';
-import { ApiResponse } from '@nestjs/swagger';
+import { ApiResponse, ApiTags } from '@nestjs/swagger';
 
+@ApiTags('Account')
 @Controller('account')
 export class AccountController {
   @Inject(AccountServiceTag) private readonly service: IAccountService;

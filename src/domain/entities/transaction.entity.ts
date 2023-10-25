@@ -1,12 +1,5 @@
 import { TransactionType } from 'src/core';
-import {
-  Column,
-  Entity,
-  JoinColumn,
-  JoinTable,
-  ManyToMany,
-  ManyToOne,
-} from 'typeorm';
+import { Column, Entity, JoinColumn, ManyToOne } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { AccountEntity } from './bank.entiti';
 import { CategoryEntity } from './category.entity';
@@ -15,6 +8,9 @@ import { CategoryEntity } from './category.entity';
 export class TransactionEntity extends AbstractEntity {
   @Column()
   public amount: number;
+
+  @Column({ nullable: true })
+  public description: string;
 
   @Column({
     type: 'enum',
@@ -32,17 +28,15 @@ export class TransactionEntity extends AbstractEntity {
   @Column()
   public accountId: string;
 
-  @ManyToMany(() => CategoryEntity, (category) => category.transactions)
-  @JoinTable({
-    name: 'transaction_categories',
-    joinColumn: {
-      name: 'transactionId',
-      referencedColumnName: 'id',
-    },
-    inverseJoinColumn: {
-      name: 'categoryId',
-      referencedColumnName: 'id',
-    },
+  @Column()
+  public moneyLeft: number;
+
+  @ManyToOne(() => CategoryEntity, (category) => category.transactions, {
+    onDelete: 'SET NULL',
   })
-  public categories: CategoryEntity[];
+  @JoinColumn({ name: 'categoryId' })
+  public category: CategoryEntity;
+
+  @Column({ nullable: true })
+  public categoryId: string;
 }

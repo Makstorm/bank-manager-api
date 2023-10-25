@@ -1,4 +1,4 @@
-import { Column, Entity, ManyToMany } from 'typeorm';
+import { Column, Entity, OneToMany } from 'typeorm';
 import { AbstractEntity } from './abstract.entity';
 import { TransactionEntity } from './transaction.entity';
 
@@ -7,10 +7,8 @@ export class CategoryEntity extends AbstractEntity {
   @Column()
   public name: string;
 
-  @ManyToMany(
-    () => TransactionEntity,
-    (transaction) => transaction.categories,
-    { cascade: true },
-  )
-  public transactions;
+  @OneToMany(() => TransactionEntity, (transaction) => transaction.category, {
+    onDelete: 'SET NULL',
+  })
+  public transactions: TransactionEntity[];
 }

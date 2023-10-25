@@ -8,5 +8,6 @@ import { TypeOrmModule } from '@nestjs/typeorm';
   imports: [TypeOrmModule.forFeature([AccountEntity])],
   controllers: [AccountController],
   providers: [{ provide: AccountServiceTag, useClass: AccountService }],
+  exports: [AccountServiceTag],
 })
 export class AccountModule {}
